@@ -25,7 +25,7 @@ Ce projet est une application simple et élégante permettant de créer des cart
 ## **Prévisualisation**  
 
 Le projet est hébergé sur GitHub Pages et accessible ici :  
-[https://Negr170.github.io/business_card_generator/](https://Negr170.github.io/business_card_generator/)  
+[https://m0um666.github.io/business_card_generator/](https://m0um666.github.io/business_card_generator/)  
 
 ## **Installation et exécution locale**  
 
@@ -75,6 +75,6 @@ Ce projet est sous licence MIT. Consultez le fichier [LICENSE](LICENSE) pour plu
 
 ## **Auteur**  
 
-Créé avec ❤️ par [Negr170](https://github.com/Negr170).  
+Créé avec ❤️ par [m0um666](https://github.com/m0um666).  
 
 ---
