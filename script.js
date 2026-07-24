@@ -2,7 +2,8 @@ document.getElementById("downloadBtn").addEventListener("click", async function(
 
     const element = document.getElementById("cardPreview");
 
-    // Créer une copie visible pour html2canvas
+
+    // Clone pour capture
     const clone = element.cloneNode(true);
 
     clone.style.display = "block";
@@ -12,9 +13,13 @@ document.getElementById("downloadBtn").addEventListener("click", async function(
     clone.style.top = "0";
     clone.style.background = "white";
     clone.style.color = "black";
-    clone.style.width = "280px";
+    clone.style.width = "350px";
+    clone.style.height = "200px";
+    clone.style.opacity = "1";
+
 
     document.body.appendChild(clone);
+
 
 
     await new Promise(resolve => setTimeout(resolve, 300));
@@ -22,36 +27,58 @@ document.getElementById("downloadBtn").addEventListener("click", async function(
 
     try {
 
+
         const canvas = await html2canvas(clone, {
+
             backgroundColor: "#ffffff",
-            scale: 2
+
+            scale: 3
+
         });
+
 
 
         const imgData = canvas.toDataURL("image/png");
 
 
+
         const { jsPDF } = window.jspdf;
 
 
+
+        // Vraie taille carte de visite
         const pdf = new jsPDF({
-            orientation: "portrait",
-            unit: "px",
-            format: [canvas.width, canvas.height]
+
+            orientation: "landscape",
+
+            unit: "mm",
+
+            format: [85, 55]
+
         });
 
 
+
         pdf.addImage(
+
             imgData,
+
             "PNG",
+
             0,
+
             0,
-            canvas.width,
-            canvas.height
+
+            85,
+
+            55
+
         );
 
 
+
         pdf.save("carte_de_visite.pdf");
+
 
 
     } catch(error) {
@@ -61,8 +88,9 @@ document.getElementById("downloadBtn").addEventListener("click", async function(
     }
 
 
-    // Supprimer la copie
+
     clone.remove();
+
 
 });
 
