@@ -55,11 +55,10 @@ input {
     border-radius: 5px;
     font-size: 0.9rem;
 }
-.hidden {
-    display: none;
-}
+
 /* Carte de visite */
 #cardPreview {
+    display: none;
     border: 2px solid #ff69b4;
     padding: 10px;
     margin-top: 20px;
