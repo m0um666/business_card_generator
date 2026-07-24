@@ -2,6 +2,8 @@ document.getElementById("businessCardForm").addEventListener("submit", function(
 
     e.preventDefault();
 
+
+    // Récupération des données
     const name = document.getElementById("name").value;
     const phone = document.getElementById("phone").value;
     const email = document.getElementById("email").value;
@@ -10,6 +12,7 @@ document.getElementById("businessCardForm").addEventListener("submit", function(
     const profilePic = document.getElementById("profilePic").files[0];
 
 
+    // Affichage dans la carte
     document.getElementById("cardName").textContent = name;
     document.getElementById("cardPhone").textContent = "Téléphone : " + phone;
     document.getElementById("cardEmail").textContent = "E-mail : " + email;
@@ -17,20 +20,33 @@ document.getElementById("businessCardForm").addEventListener("submit", function(
     document.getElementById("cardPostalCode").textContent = "Code postal : " + postalCode;
 
 
+
+    // Gestion de la photo
     if (profilePic) {
 
         const reader = new FileReader();
 
         reader.onload = function(event) {
+
             document.getElementById("cardPhoto").src = event.target.result;
+
         };
 
         reader.readAsDataURL(profilePic);
+
     }
 
 
-    document.getElementById("cardPreview").style.display = "block";
+
+    // Afficher la carte
+    const cardPreview = document.getElementById("cardPreview");
+
+    cardPreview.style.display = "block";
+
+
+    // Afficher bouton PDF
     document.getElementById("downloadBtn").style.display = "block";
+
 
 });
 
@@ -38,7 +54,9 @@ document.getElementById("businessCardForm").addEventListener("submit", function(
 
 
 
+// =============================
 // TELECHARGEMENT PDF
+// =============================
 
 document.getElementById("downloadBtn").addEventListener("click", async function() {
 
@@ -46,18 +64,18 @@ document.getElementById("downloadBtn").addEventListener("click", async function(
     const card = document.getElementById("cardPreview");
 
 
-    // Attendre que tout soit affiché
+    // Attendre le rendu
     await new Promise(resolve => setTimeout(resolve, 500));
+
 
 
     const canvas = await html2canvas(card, {
 
         scale: 3,
+
         backgroundColor: "#ffffff",
 
-        useCORS: true,
-
-        allowTaint: true
+        useCORS: true
 
     });
 
@@ -71,16 +89,14 @@ document.getElementById("downloadBtn").addEventListener("click", async function(
 
 
 
+    // Taille carte de visite standard
     const pdf = new jsPDF({
 
-        orientation: "portrait",
+        orientation: "landscape",
 
-        unit: "px",
+        unit: "mm",
 
-        format: [
-            canvas.width,
-            canvas.height
-        ]
+        format: [85, 55]
 
     });
 
@@ -96,9 +112,9 @@ document.getElementById("downloadBtn").addEventListener("click", async function(
 
         0,
 
-        canvas.width,
+        85,
 
-        canvas.height
+        55
 
     );
 
@@ -113,7 +129,9 @@ document.getElementById("downloadBtn").addEventListener("click", async function(
 
 
 
+// =============================
 // DATE ET HEURE
+// =============================
 
 function updateDateTime() {
 
@@ -124,7 +142,9 @@ function updateDateTime() {
     if (!dateTimeElement) return;
 
 
+
     const now = new Date();
+
 
 
     const options = {
@@ -144,13 +164,16 @@ function updateDateTime() {
     };
 
 
+
     dateTimeElement.textContent =
         now.toLocaleDateString("fr-FR", options);
+
 
 }
 
 
 
 setInterval(updateDateTime, 1000);
+
 
 updateDateTime();
