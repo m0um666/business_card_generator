@@ -1,161 +1,97 @@
 <!DOCTYPE html>
 <html lang="fr">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Générateur de Carte de Visite</title>
-
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-    <header>
-        <div id="dateTime"></div>
-        <h1>Générateur de Carte de Visite</h1>
-    </header>
+<header>
+    <div id="dateTime"></div>
+    <h1>Générateur de Carte de Visite</h1>
+</header>
 
 
-    <main>
+<main>
 
-        <!-- FORMULAIRE -->
-        <form id="businessCardForm">
+<form id="businessCardForm">
 
-            <label for="name">Nom :</label>
-            <input 
-                type="text" 
-                id="name" 
-                placeholder="Votre nom complet" 
-                required
-            >
+    <label for="name">Nom :</label>
+    <input type="text" id="name" placeholder="Votre nom complet" required>
 
 
-            <label for="phone">Numéro de téléphone :</label>
-            <input 
-                type="tel" 
-                id="phone" 
-                placeholder="Votre numéro de téléphone" 
-                required
-            >
+    <label for="phone">Numéro de téléphone :</label>
+    <input type="tel" id="phone" placeholder="Votre numéro de téléphone" required>
 
 
-            <label for="email">E-mail :</label>
-            <input 
-                type="email" 
-                id="email" 
-                placeholder="Votre adresse e-mail" 
-                required
-            >
+    <label for="email">E-mail :</label>
+    <input type="email" id="email" placeholder="Votre adresse e-mail" required>
 
 
-            <label for="job">Métier :</label>
-            <input 
-                type="text" 
-                id="job" 
-                placeholder="Votre métier" 
-                required
-            >
+    <label for="job">Métier :</label>
+    <input type="text" id="job" placeholder="Votre métier" required>
 
 
-            <label for="postalCode">Code postal :</label>
-            <input 
-                type="text" 
-                id="postalCode" 
-                placeholder="Votre code postal" 
-                required
-            >
+    <label for="postalCode">Code postal :</label>
+    <input type="text" id="postalCode" placeholder="Votre code postal" required>
 
 
-            <label for="profilePic">Photo de profil :</label>
-            <input 
-                type="file" 
-                id="profilePic" 
-                accept="image/*"
-            >
+    <label for="profilePic">Photo de profil :</label>
+    <input type="file" id="profilePic" accept="image/*">
 
 
-            <button type="submit">
-                Générer
-            </button>
+    <button type="submit">
+        Générer
+    </button>
 
-        </form>
+</form>
 
 
 
-        <!-- APERCU CARTE -->
-        <div id="cardPreview">
+<div id="cardPreview">
 
-            <img 
-                id="cardPhoto" 
-                src="" 
-                alt="Photo de profil"
-            >
+    <img id="cardPhoto" alt="Photo de profil">
 
-            <h2 id="cardName">
-                Votre nom
-            </h2>
+    <h2 id="cardName"></h2>
 
-            <p id="cardJob">
-                Métier :
-            </p>
+    <p id="cardPhone"></p>
 
-            <p id="cardPhone">
-                Téléphone :
-            </p>
+    <p id="cardEmail"></p>
 
-            <p id="cardEmail">
-                E-mail :
-            </p>
+    <p id="cardJob"></p>
 
-            <p id="cardPostalCode">
-                Code postal :
-            </p>
+    <p id="cardPostalCode"></p>
 
-        </div>
+</div>
+
+
+<button id="downloadBtn" style="display:none;">
+    Télécharger en PDF
+</button>
+
+
+</main>
 
 
 
-        <!-- TELECHARGEMENT -->
-        <button 
-            type="button" 
-            id="downloadBtn" 
-            style="display:none;"
-        >
-            Télécharger en PDF
-        </button>
-
-
-    </main>
+<footer>
+    © 2025 Copyright By 
+    <a href="https://github.com/Negr170" target="_blank">
+        m0um666
+    </a>
+</footer>
 
 
 
-    <footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
-        © 2025 Copyright By
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
-        <a 
-            href="https://github.com/Negr170" 
-            target="_blank"
-        >
-            m0um666
-        </a>
-
-    </footer>
-
-
-
-    <!-- Librairies PDF -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-
-
-    <!-- Ton JavaScript -->
-    <script src="script.js"></script>
+<script src="script.js"></script>
 
 
 </body>
-
 </html>
