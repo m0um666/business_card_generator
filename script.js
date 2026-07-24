@@ -2,7 +2,6 @@ document.getElementById("businessCardForm").addEventListener("submit", function(
 
     e.preventDefault();
 
-
     const name = document.getElementById("name").value;
     const phone = document.getElementById("phone").value;
     const email = document.getElementById("email").value;
@@ -12,34 +11,26 @@ document.getElementById("businessCardForm").addEventListener("submit", function(
 
 
     document.getElementById("cardName").textContent = name;
-    document.getElementById("cardPhone").textContent = `Téléphone : ${phone}`;
-    document.getElementById("cardEmail").textContent = `E-mail : ${email}`;
-    document.getElementById("cardJob").textContent = `Métier : ${job}`;
-    document.getElementById("cardPostalCode").textContent = `Code postal : ${postalCode}`;
-
+    document.getElementById("cardPhone").textContent = "Téléphone : " + phone;
+    document.getElementById("cardEmail").textContent = "E-mail : " + email;
+    document.getElementById("cardJob").textContent = "Métier : " + job;
+    document.getElementById("cardPostalCode").textContent = "Code postal : " + postalCode;
 
 
     if (profilePic) {
 
         const reader = new FileReader();
 
-        reader.onload = function(e) {
-            document.getElementById("cardPhoto").src = e.target.result;
+        reader.onload = function(event) {
+            document.getElementById("cardPhoto").src = event.target.result;
         };
 
         reader.readAsDataURL(profilePic);
-
     }
 
 
-
-    const cardPreview = document.getElementById("cardPreview");
-
-    cardPreview.style.display = "block";
-
-
+    document.getElementById("cardPreview").style.display = "block";
     document.getElementById("downloadBtn").style.display = "block";
-
 
 });
 
@@ -47,49 +38,74 @@ document.getElementById("businessCardForm").addEventListener("submit", function(
 
 
 
+// TELECHARGEMENT PDF
+
 document.getElementById("downloadBtn").addEventListener("click", async function() {
 
-    const element = document.getElementById("cardPreview");
 
-    // Vérifie que la carte est visible
-    element.style.display = "block";
-    element.style.visibility = "visible";
+    const card = document.getElementById("cardPreview");
 
 
-    // Petite attente pour laisser le navigateur afficher la carte
+    // Attendre que tout soit affiché
     await new Promise(resolve => setTimeout(resolve, 500));
 
 
-    const canvas = await html2canvas(element, {
+    const canvas = await html2canvas(card, {
+
+        scale: 3,
         backgroundColor: "#ffffff",
-        scale: 2
+
+        useCORS: true,
+
+        allowTaint: true
+
     });
 
 
-    const imgData = canvas.toDataURL("image/png");
+
+    const image = canvas.toDataURL("image/png");
+
 
 
     const { jsPDF } = window.jspdf;
 
 
+
     const pdf = new jsPDF({
+
         orientation: "portrait",
+
         unit: "px",
-        format: [canvas.width, canvas.height]
+
+        format: [
+            canvas.width,
+            canvas.height
+        ]
+
     });
 
 
+
     pdf.addImage(
-        imgData,
+
+        image,
+
         "PNG",
+
         0,
+
         0,
+
         canvas.width,
+
         canvas.height
+
     );
 
 
+
     pdf.save("carte_de_visite.pdf");
+
 
 });
 
@@ -97,32 +113,44 @@ document.getElementById("downloadBtn").addEventListener("click", async function(
 
 
 
+// DATE ET HEURE
 
 function updateDateTime() {
 
+
     const dateTimeElement = document.getElementById("dateTime");
+
+
+    if (!dateTimeElement) return;
 
 
     const now = new Date();
 
 
     const options = {
+
         year: "numeric",
+
         month: "long",
+
         day: "numeric",
+
         hour: "2-digit",
+
         minute: "2-digit",
+
         second: "2-digit"
+
     };
 
 
-    dateTimeElement.textContent = now.toLocaleDateString("fr-FR", options);
+    dateTimeElement.textContent =
+        now.toLocaleDateString("fr-FR", options);
 
 }
 
 
 
 setInterval(updateDateTime, 1000);
-
 
 updateDateTime();
