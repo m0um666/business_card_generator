@@ -1,84 +1,68 @@
-document.getElementById("businessCardForm").addEventListener("submit", function(e) {
-
-    e.preventDefault();
-
-
-    const name = document.getElementById("name").value;
-    const phone = document.getElementById("phone").value;
-    const email = document.getElementById("email").value;
-    const job = document.getElementById("job").value;
-    const postalCode = document.getElementById("postalCode").value;
-    const profilePic = document.getElementById("profilePic").files[0];
-
-
-    document.getElementById("cardName").textContent = name;
-    document.getElementById("cardPhone").textContent = `Téléphone : ${phone}`;
-    document.getElementById("cardEmail").textContent = `E-mail : ${email}`;
-    document.getElementById("cardJob").textContent = `Métier : ${job}`;
-    document.getElementById("cardPostalCode").textContent = `Code postal : ${postalCode}`;
-
-
-
-    if (profilePic) {
-
-        const reader = new FileReader();
-
-        reader.onload = function(e) {
-            document.getElementById("cardPhoto").src = e.target.result;
-        };
-
-        reader.readAsDataURL(profilePic);
-
-    }
-
-
-
-    const cardPreview = document.getElementById("cardPreview");
-
-    cardPreview.style.display = "block";
-
-
-    document.getElementById("downloadBtn").style.display = "block";
-
-
-});
-
-
-
-
-
-document.getElementById("downloadBtn").addEventListener("click", function() {
-
+document.getElementById("downloadBtn").addEventListener("click", async function() {
 
     const element = document.getElementById("cardPreview");
 
+    // Créer une copie visible pour html2canvas
+    const clone = element.cloneNode(true);
 
-    html2canvas(element).then((canvas) => {
+    clone.style.display = "block";
+    clone.style.visibility = "visible";
+    clone.style.position = "absolute";
+    clone.style.left = "-9999px";
+    clone.style.top = "0";
+    clone.style.background = "white";
+    clone.style.color = "black";
+    clone.style.width = "280px";
+
+    document.body.appendChild(clone);
+
+
+    await new Promise(resolve => setTimeout(resolve, 300));
+
+
+    try {
+
+        const canvas = await html2canvas(clone, {
+            backgroundColor: "#ffffff",
+            scale: 2
+        });
 
 
         const imgData = canvas.toDataURL("image/png");
 
 
-        // Correction jsPDF
         const { jsPDF } = window.jspdf;
 
 
-        const pdf = new jsPDF();
+        const pdf = new jsPDF({
+            orientation: "portrait",
+            unit: "px",
+            format: [canvas.width, canvas.height]
+        });
 
 
         pdf.addImage(
             imgData,
             "PNG",
-            10,
-            10
+            0,
+            0,
+            canvas.width,
+            canvas.height
         );
 
 
         pdf.save("carte_de_visite.pdf");
 
 
-    });
+    } catch(error) {
 
+        console.error("Erreur PDF :", error);
+
+    }
+
+
+    // Supprimer la copie
+    clone.remove();
 
 });
 
