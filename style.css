@@ -58,15 +58,16 @@ input {
 
 /* Carte de visite */
 #cardPreview {
-    display: none;
     border: 2px solid #ff69b4;
     padding: 10px;
     margin-top: 20px;
     border-radius: 8px;
-    background-color: #fff;
+    background-color: white;
+    color: black;
     width: 280px;
-    margin: 0 auto;
-    animation: fadeIn 1s ease-in-out;
+    margin-left: auto;
+    margin-right: auto;
+    display: none;
 }
 
 #cardPhoto {
