@@ -168,7 +168,8 @@ input {
     overflow: hidden;
 
 
-    animation: fadeIn 0.5s ease-in-out;
+animation: none;
+opacity: 1;
 
 }
 
