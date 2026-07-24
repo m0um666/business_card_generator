@@ -47,40 +47,52 @@ document.getElementById("businessCardForm").addEventListener("submit", function(
 
 
 
-document.getElementById("downloadBtn").addEventListener("click", function() {
-
+document.getElementById("downloadBtn").addEventListener("click", async function() {
 
     const element = document.getElementById("cardPreview");
 
-
-    html2canvas(element).then((canvas) => {
-
-
-        const imgData = canvas.toDataURL("image/png");
+    // Vérifie que la carte est visible
+    element.style.display = "block";
+    element.style.visibility = "visible";
 
 
-        // Correction jsPDF
-        const { jsPDF } = window.jspdf;
+    // Petite attente pour laisser le navigateur afficher la carte
+    await new Promise(resolve => setTimeout(resolve, 500));
 
 
-        const pdf = new jsPDF();
-
-
-        pdf.addImage(
-            imgData,
-            "PNG",
-            10,
-            10
-        );
-
-
-        pdf.save("carte_de_visite.pdf");
-
-
+    const canvas = await html2canvas(element, {
+        backgroundColor: "#ffffff",
+        scale: 2
     });
 
 
+    const imgData = canvas.toDataURL("image/png");
+
+
+    const { jsPDF } = window.jspdf;
+
+
+    const pdf = new jsPDF({
+        orientation: "portrait",
+        unit: "px",
+        format: [canvas.width, canvas.height]
+    });
+
+
+    pdf.addImage(
+        imgData,
+        "PNG",
+        0,
+        0,
+        canvas.width,
+        canvas.height
+    );
+
+
+    pdf.save("carte_de_visite.pdf");
+
 });
+
 
 
 
