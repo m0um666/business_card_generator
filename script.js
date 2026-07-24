@@ -16,42 +16,103 @@ document.getElementById("businessCardForm").addEventListener("submit", function(
     document.getElementById("cardJob").textContent = `Métier : ${job}`;
     document.getElementById("cardPostalCode").textContent = `Code postal : ${postalCode}`;
 
+    // Gestion de la photo
     if (profilePic) {
         const reader = new FileReader();
+
         reader.onload = function(e) {
             document.getElementById("cardPhoto").src = e.target.result;
         };
+
         reader.readAsDataURL(profilePic);
     } else {
         document.getElementById("cardPhoto").src = "";
     }
 
+    // Afficher la carte
     const cardPreview = document.getElementById("cardPreview");
-    cardPreview.style.display = "block";
 
-    // Afficher le bouton de téléchargement
-    document.getElementById("downloadBtn").style.display = "block";
+    if (cardPreview) {
+        cardPreview.style.display = "block";
+    }
+
+    // Afficher le bouton téléchargement
+    const downloadBtn = document.getElementById("downloadBtn");
+
+    if (downloadBtn) {
+        downloadBtn.style.display = "block";
+    }
 });
 
+
+// Téléchargement PDF
 document.getElementById("downloadBtn").addEventListener("click", function() {
+
     const element = document.getElementById("cardPreview");
 
+    if (!element) {
+        console.error("La carte n'a pas été trouvée.");
+        return;
+    }
+
     html2canvas(element).then((canvas) => {
+
         const imgData = canvas.toDataURL("image/png");
-        const pdf = new jsPDF();
-        pdf.addImage(imgData, "PNG", 10, 10);
+
+        // Correction jsPDF
+        const { jsPDF } = window.jspdf;
+
+        const pdf = new jsPDF({
+            orientation: "landscape",
+            unit: "px",
+            format: [canvas.width, canvas.height]
+        });
+
+        pdf.addImage(
+            imgData,
+            "PNG",
+            0,
+            0,
+            canvas.width,
+            canvas.height
+        );
+
         pdf.save("carte_de_visite.pdf");
+
+    }).catch((error) => {
+        console.error("Erreur lors de la création du PDF :", error);
     });
+
 });
+
+
+// Date et heure en direct
 function updateDateTime() {
+
     const dateTimeElement = document.getElementById("dateTime");
+
+    if (!dateTimeElement) {
+        return;
+    }
+
     const now = new Date();
-    const options = { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit' };
-    dateTimeElement.textContent = now.toLocaleDateString('fr-FR', options);
+
+    const options = {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit"
+    };
+
+    dateTimeElement.textContent = now.toLocaleDateString("fr-FR", options);
 }
 
-// Met à jour la date et l'heure toutes les secondes
+
+// Mise à jour chaque seconde
 setInterval(updateDateTime, 1000);
+
 
 // Initialisation
 updateDateTime();
