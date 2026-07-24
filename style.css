@@ -55,7 +55,9 @@ input {
     border-radius: 5px;
     font-size: 0.9rem;
 }
-
+.hidden {
+    display: none;
+}
 /* Carte de visite */
 #cardPreview {
     border: 2px solid #ff69b4;
@@ -63,7 +65,6 @@ input {
     margin-top: 20px;
     border-radius: 8px;
     background-color: #fff;
-    display: none;
     width: 280px;
     margin: 0 auto;
     animation: fadeIn 1s ease-in-out;
