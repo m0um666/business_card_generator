@@ -3,7 +3,6 @@ document.getElementById("businessCardForm").addEventListener("submit", function(
     e.preventDefault();
 
 
-    // Récupération des données
     const name = document.getElementById("name").value;
     const phone = document.getElementById("phone").value;
     const email = document.getElementById("email").value;
@@ -12,24 +11,20 @@ document.getElementById("businessCardForm").addEventListener("submit", function(
     const profilePic = document.getElementById("profilePic").files[0];
 
 
-    // Affichage dans la carte
     document.getElementById("cardName").textContent = name;
-    document.getElementById("cardPhone").textContent = "Téléphone : " + phone;
-    document.getElementById("cardEmail").textContent = "E-mail : " + email;
-    document.getElementById("cardJob").textContent = "Métier : " + job;
-    document.getElementById("cardPostalCode").textContent = "Code postal : " + postalCode;
+    document.getElementById("cardPhone").textContent = `Téléphone : ${phone}`;
+    document.getElementById("cardEmail").textContent = `E-mail : ${email}`;
+    document.getElementById("cardJob").textContent = `Métier : ${job}`;
+    document.getElementById("cardPostalCode").textContent = `Code postal : ${postalCode}`;
 
 
 
-    // Gestion de la photo
     if (profilePic) {
 
         const reader = new FileReader();
 
-        reader.onload = function(event) {
-
-            document.getElementById("cardPhoto").src = event.target.result;
-
+        reader.onload = function(e) {
+            document.getElementById("cardPhoto").src = e.target.result;
         };
 
         reader.readAsDataURL(profilePic);
@@ -38,13 +33,11 @@ document.getElementById("businessCardForm").addEventListener("submit", function(
 
 
 
-    // Afficher la carte
     const cardPreview = document.getElementById("cardPreview");
 
     cardPreview.style.display = "block";
 
 
-    // Afficher bouton PDF
     document.getElementById("downloadBtn").style.display = "block";
 
 
@@ -54,73 +47,37 @@ document.getElementById("businessCardForm").addEventListener("submit", function(
 
 
 
-// =============================
-// TELECHARGEMENT PDF
-// =============================
-
-document.getElementById("downloadBtn").addEventListener("click", async function() {
+document.getElementById("downloadBtn").addEventListener("click", function() {
 
 
-    const card = document.getElementById("cardPreview");
+    const element = document.getElementById("cardPreview");
 
 
-    // Attendre le rendu
-    await new Promise(resolve => setTimeout(resolve, 500));
+    html2canvas(element).then((canvas) => {
 
 
+        const imgData = canvas.toDataURL("image/png");
 
-    const canvas = await html2canvas(card, {
 
-        scale: 3,
+        // Correction jsPDF
+        const { jsPDF } = window.jspdf;
 
-        backgroundColor: "#ffffff",
 
-        useCORS: true
+        const pdf = new jsPDF();
+
+
+        pdf.addImage(
+            imgData,
+            "PNG",
+            10,
+            10
+        );
+
+
+        pdf.save("carte_de_visite.pdf");
+
 
     });
-
-
-
-    const image = canvas.toDataURL("image/png");
-
-
-
-    const { jsPDF } = window.jspdf;
-
-
-
-    // Taille carte de visite standard
-    const pdf = new jsPDF({
-
-        orientation: "landscape",
-
-        unit: "mm",
-
-        format: [85, 55]
-
-    });
-
-
-
-    pdf.addImage(
-
-        image,
-
-        "PNG",
-
-        0,
-
-        0,
-
-        85,
-
-        55
-
-    );
-
-
-
-    pdf.save("carte_de_visite.pdf");
 
 
 });
@@ -129,45 +86,25 @@ document.getElementById("downloadBtn").addEventListener("click", async function(
 
 
 
-// =============================
-// DATE ET HEURE
-// =============================
-
 function updateDateTime() {
 
-
     const dateTimeElement = document.getElementById("dateTime");
-
-
-    if (!dateTimeElement) return;
-
 
 
     const now = new Date();
 
 
-
     const options = {
-
         year: "numeric",
-
         month: "long",
-
         day: "numeric",
-
         hour: "2-digit",
-
         minute: "2-digit",
-
         second: "2-digit"
-
     };
 
 
-
-    dateTimeElement.textContent =
-        now.toLocaleDateString("fr-FR", options);
-
+    dateTimeElement.textContent = now.toLocaleDateString("fr-FR", options);
 
 }
 
