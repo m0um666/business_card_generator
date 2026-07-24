@@ -46,20 +46,39 @@ document.getElementById("businessCardForm").addEventListener("submit", function(
 
 
 // Téléchargement PDF
-document.getElementById("downloadBtn").addEventListener("click", function() {
+document.getElementById("downloadBtn").addEventListener("click", async function() {
 
     const element = document.getElementById("cardPreview");
 
     if (!element) {
-        console.error("La carte n'a pas été trouvée.");
+        console.error("Carte introuvable");
         return;
     }
 
-    html2canvas(element).then((canvas) => {
+    // Attendre que les images soient chargées
+    const images = element.querySelectorAll("img");
+
+    await Promise.all(
+        [...images].map(img => {
+            if (img.complete) return Promise.resolve();
+
+            return new Promise(resolve => {
+                img.onload = resolve;
+                img.onerror = resolve;
+            });
+        })
+    );
+
+    try {
+
+        const canvas = await html2canvas(element, {
+            scale: 3,
+            backgroundColor: "#ffffff",
+            logging: true
+        });
 
         const imgData = canvas.toDataURL("image/png");
 
-        // Correction jsPDF
         const { jsPDF } = window.jspdf;
 
         const pdf = new jsPDF({
@@ -79,9 +98,11 @@ document.getElementById("downloadBtn").addEventListener("click", function() {
 
         pdf.save("carte_de_visite.pdf");
 
-    }).catch((error) => {
-        console.error("Erreur lors de la création du PDF :", error);
-    });
+    } catch(error) {
+        console.error("Erreur PDF :", error);
+    }
+
+});
 
 });
 
