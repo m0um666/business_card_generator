@@ -33,7 +33,7 @@ document.getElementById("businessCardForm").addEventListener("submit", function(
     const cardPreview = document.getElementById("cardPreview");
 
     if (cardPreview) {
-        cardPreview.style.display = "block";
+       cardPreview.classList.remove("hidden");
     }
 
     // Afficher le bouton téléchargement
