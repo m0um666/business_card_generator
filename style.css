@@ -1,114 +1,272 @@
-/* Style général */
+/* =========================
+   STYLE GENERAL
+========================= */
+
 body {
     font-family: Arial, sans-serif;
     text-align: center;
     margin: 20px;
-    background-color: #fff5f8; /* Fond légèrement rose */
+    background-color: #fff5f8;
     color: #333;
 }
 
-/* Couleurs principales */
+
+/* =========================
+   TITRE
+========================= */
+
 h1 {
-    color: #ff69b4; /* Rose vif */
+    color: #ff69b4;
 }
+
+
+
+/* =========================
+   BOUTONS
+========================= */
 
 button {
+
     background-color: #ff69b4;
-    color: #fff;
+
+    color: white;
+
     border: none;
+
     padding: 8px 16px;
+
     border-radius: 5px;
+
     cursor: pointer;
-    transition: background-color 0.3s ease;
+
     font-size: 0.9rem;
+
+    transition: 0.3s;
+
 }
+
 
 button:hover {
+
     background-color: #ff85c1;
+
 }
 
+
+
+/* =========================
+   FORMULAIRE
+========================= */
 
 form {
+
     margin-bottom: 20px;
+
     background-color: #ffe3ed;
+
     padding: 15px;
+
     border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    width: 300px; 
-    margin: 0 auto;
+
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+
+    width: 300px;
+
+    margin-left: auto;
+
+    margin-right: auto;
+
 }
-#dateTime {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    font-size: 0.9rem;
-    color: #555;
-    font-family: Arial, sans-serif;
+
+
+
+label {
+
+    display: block;
+
+    margin-top: 8px;
+
 }
+
+
 
 input {
+
     display: block;
+
     margin: 8px auto;
+
     padding: 8px;
+
     width: 90%;
+
     border: 1px solid #ff69b4;
+
     border-radius: 5px;
+
     font-size: 0.9rem;
+
 }
 
-/* Carte de visite */
-#cardPreview {
-    border: 2px solid #ff69b4;
-    padding: 10px;
-    margin-top: 20px;
-    border-radius: 8px;
-    background-color: white;
-    color: black;
-    width: 280px;
-    margin-left: auto;
-    margin-right: auto;
-    display: none;
+
+
+/* =========================
+   DATE ET HEURE
+========================= */
+
+#dateTime {
+
+    position: absolute;
+
+    top: 10px;
+
+    left: 10px;
+
+    font-size: 0.9rem;
+
+    color: #555;
+
 }
+
+
+
+/* =========================
+   CARTE DE VISITE
+========================= */
+
+#cardPreview {
+
+    width: 350px;
+
+    height: 200px;
+
+
+    border: 2px solid #ff69b4;
+
+    border-radius: 10px;
+
+
+    background-color: white;
+
+    color: black;
+
+
+    padding: 15px;
+
+    box-sizing: border-box;
+
+
+    margin: 20px auto;
+
+
+    display: none;
+
+
+    text-align: center;
+
+
+    overflow: hidden;
+
+
+    animation: fadeIn 0.5s ease-in-out;
+
+}
+
+
+
+/* PHOTO */
 
 #cardPhoto {
-    width: 70px;
-    height: 70px;
+
+    width: 65px;
+
+    height: 65px;
+
+
     border-radius: 50%;
-    margin-bottom: 10px;
+
+
     object-fit: cover;
+
+
     display: block;
-    margin-left: auto;
-    margin-right: auto;
+
+
+    margin: 0 auto 8px;
+
 }
+
+
+
+/* NOM */
 
 #cardPreview h2 {
-    margin: 0;
+
+    margin: 5px 0;
+
+
     color: #ff69b4;
-    font-size: 1.1rem;
+
+
+    font-size: 18px;
+
 }
+
+
+
+/* INFORMATIONS */
 
 #cardPreview p {
-    margin: 4px 0;
+
+    margin: 3px 0;
+
+
     color: #555;
-    font-size: 0.9rem;
+
+
+    font-size: 12px;
+
 }
 
-/* Copyright */
+
+
+/* =========================
+   FOOTER
+========================= */
+
 footer {
+
     margin-top: 20px;
+
     color: #666;
+
     font-size: 0.8rem;
-    text-align: center;
+
 }
 
+
+
+/* =========================
+   ANIMATION
+========================= */
 
 @keyframes fadeIn {
+
     from {
+
         opacity: 0;
-        transform: translateY(50px);
+
+        transform: translateY(20px);
+
     }
+
+
     to {
+
         opacity: 1;
+
         transform: translateY(0);
+
     }
+
 }
