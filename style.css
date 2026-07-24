@@ -25,7 +25,11 @@ h1 {
    BOUTONS
 ========================= */
 
-button {
+#downloadBtn {
+
+    display: block;
+
+    margin: 20px auto;
 
     background-color: #ff69b4;
 
@@ -33,20 +37,18 @@ button {
 
     border: none;
 
-    padding: 8px 16px;
+    padding: 10px 20px;
 
-    border-radius: 5px;
+    border-radius: 8px;
 
     cursor: pointer;
 
-    font-size: 0.9rem;
-
-    transition: 0.3s;
+    font-size: 1rem;
 
 }
 
 
-button:hover {
+#downloadBtn:hover {
 
     background-color: #ff85c1;
 
