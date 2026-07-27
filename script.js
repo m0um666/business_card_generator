@@ -1,3 +1,4 @@
+console.log("Le script est chargé");
 // Génération de la carte de visite
 document.getElementById("businessCardForm").addEventListener("submit", function (e) {
     e.preventDefault();
