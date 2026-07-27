@@ -43,8 +43,10 @@ document.getElementById("downloadBtn").addEventListener("click", async function 
     clone.style.top = "0";
     clone.style.background = "#ffffff";
     clone.style.color = "#000000";
-    clone.style.width = "320px";
-    clone.style.padding = "20px";
+   clone.style.width = "350px";
+    clone.style.height = "200px";
+    clone.style.padding = "15px";
+    clone.style.overflow = "hidden";
 
     document.body.appendChild(clone);
 
@@ -61,21 +63,20 @@ document.getElementById("downloadBtn").addEventListener("click", async function 
 
         const { jsPDF } = window.jspdf;
 
-        const pdf = new jsPDF({
-            orientation: "portrait",
-            unit: "px",
-            format: [canvas.width, canvas.height]
-        });
+       const pdf = new jsPDF({
+    orientation: "landscape",
+    unit: "px",
+    format: [400, 250]
+});
 
         pdf.addImage(
-            imgData,
-            "PNG",
-            0,
-            0,
-            canvas.width,
-            canvas.height
-        );
-
+    imgData,
+    "PNG",
+    25,
+    25,
+    350,
+    200
+);
         pdf.save("carte_de_visite.pdf");
 
     } catch (error) {
