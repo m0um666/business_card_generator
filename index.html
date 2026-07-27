@@ -1,88 +1,219 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Générateur de Carte de Visite</title>
+
     <link rel="stylesheet" href="style.css">
 </head>
 
+
 <body>
 
+
 <header>
+
     <div id="dateTime"></div>
-    <h1>Générateur de Carte de Visite</h1>
+
+    <h1>
+        ✨ Générateur de Carte de Visite
+    </h1>
+
+    <p>
+        Créez une carte professionnelle élégante en quelques secondes
+    </p>
+
 </header>
+
+
 
 
 <main>
 
-<form id="businessCardForm">
 
-    <label for="name">Nom :</label>
-    <input type="text" id="name" placeholder="Votre nom complet" required>
-
-
-    <label for="phone">Numéro de téléphone :</label>
-    <input type="tel" id="phone" placeholder="Votre numéro de téléphone" required>
-
-
-    <label for="email">E-mail :</label>
-    <input type="email" id="email" placeholder="Votre adresse e-mail" required>
-
-
-    <label for="job">Métier :</label>
-    <input type="text" id="job" placeholder="Votre métier" required>
-
-
-    <label for="postalCode">Code postal :</label>
-    <input type="text" id="postalCode" placeholder="Votre code postal" required>
-
-
-    <label for="profilePic">Photo de profil :</label>
-    <input type="file" id="profilePic" accept="image/*">
-
-
-    <button type="submit">
-        Générer
-    </button>
-
-</form>
+<div class="app-container">
 
 
 
-<div id="cardPreview">
+    <!-- FORMULAIRE -->
 
-    <img id="cardPhoto" alt="Photo de profil">
+    <section class="form-card">
 
-    <h2 id="cardName"></h2>
 
-    <p id="cardPhone"></p>
+        <h2>
+            📝 Vos informations
+        </h2>
 
-    <p id="cardEmail"></p>
 
-    <p id="cardJob"></p>
 
-    <p id="cardPostalCode"></p>
+        <form id="businessCardForm">
+
+
+            <label for="name">
+                Nom complet
+            </label>
+
+            <input 
+            type="text" 
+            id="name" 
+            placeholder="Votre nom complet" 
+            required>
+
+
+
+            <label for="phone">
+                Téléphone
+            </label>
+
+            <input 
+            type="tel" 
+            id="phone" 
+            placeholder="Votre numéro de téléphone" 
+            required>
+
+
+
+            <label for="email">
+                E-mail
+            </label>
+
+            <input 
+            type="email" 
+            id="email" 
+            placeholder="Votre adresse e-mail" 
+            required>
+
+
+
+            <label for="job">
+                Métier
+            </label>
+
+            <input 
+            type="text" 
+            id="job" 
+            placeholder="Votre métier" 
+            required>
+
+
+
+            <label for="postalCode">
+                Code postal
+            </label>
+
+            <input 
+            type="text" 
+            id="postalCode" 
+            placeholder="Votre code postal" 
+            required>
+
+
+
+            <label for="profilePic">
+                Photo de profil
+            </label>
+
+            <input 
+            type="file" 
+            id="profilePic" 
+            accept="image/*">
+
+
+
+            <button type="submit">
+                🚀 Générer la carte
+            </button>
+
+
+        </form>
+
+
+    </section>
+
+
+
+
+
+
+    <!-- APERCU CARTE -->
+
+
+    <section class="preview-card">
+
+
+        <h2>
+            👀 Aperçu
+        </h2>
+
+
+
+        <div id="cardPreview">
+
+
+            <img 
+            id="cardPhoto" 
+            alt="Photo de profil">
+
+
+
+            <h2 id="cardName"></h2>
+
+
+            <p id="cardPhone"></p>
+
+
+            <p id="cardEmail"></p>
+
+
+            <p id="cardJob"></p>
+
+
+            <p id="cardPostalCode"></p>
+
+
+
+        </div>
+
+
+
+
+
+        <button id="downloadBtn" style="display:none;">
+            📄 Télécharger en PDF
+        </button>
+
+
+
+    </section>
+
+
+
 
 </div>
 
-
-<button id="downloadBtn" style="display:none;">
-    Télécharger en PDF
-</button>
 
 
 </main>
 
 
 
+
+
 <footer>
-    © 2025 Copyright By 
-    <a href="https://github.com/Negr170" target="_blank">
+
+    © 2026 Copyright By
+
+    <a href="https://github.com/m0um666" target="_blank">
         m0um666
     </a>
+
+
 </footer>
+
+
 
 
 
@@ -94,4 +225,5 @@
 
 
 </body>
+
 </html>
