@@ -73,6 +73,7 @@ document.getElementById("downloadBtn").style.display="block";
 
 
 
+
 // EXPORT PDF
 
 
@@ -85,6 +86,16 @@ document
 const element=document.getElementById("cardPreview");
 
 
+// Correction opacité image pendant export
+
+const photo = document.getElementById("cardPhoto");
+
+const ancienneOpacite = photo.style.opacity;
+
+
+photo.style.opacity = "1";
+
+
 
 const canvas =
 await html2canvas(element,{
@@ -93,9 +104,17 @@ backgroundColor:"#ffffff",
 
 scale:3,
 
-useCORS:true
+useCORS:true,
+
+allowTaint:true
 
 });
+
+
+
+// remettre l'opacité après capture
+
+photo.style.opacity = ancienneOpacite;
 
 
 
