@@ -1,3 +1,4 @@
+console.log("script chargé");
 document.getElementById("downloadBtn").addEventListener("click", async function() {
 
     const element = document.getElementById("cardPreview");
