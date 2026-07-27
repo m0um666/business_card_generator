@@ -1,56 +1,133 @@
 /* =========================
-   STYLE GENERAL
+   GLOBAL
 ========================= */
+
+* {
+    box-sizing: border-box;
+}
+
 
 body {
-    font-family: Arial, sans-serif;
-    text-align: center;
-    margin: 20px;
-    background-color: #fff5f8;
+
+    margin: 0;
+
+    padding: 20px;
+
+    font-family: "Segoe UI", Arial, sans-serif;
+
+    background: linear-gradient(135deg, #ff9acb, #9b8cff);
+
+    min-height: 100vh;
+
     color: #333;
-}
 
-
-/* =========================
-   TITRE
-========================= */
-
-h1 {
-    color: #ff69b4;
 }
 
 
 
+
 /* =========================
-   BOUTONS
+   HEADER
 ========================= */
 
-button {
+header {
 
-    background-color: #ff69b4;
+    text-align: center;
 
     color: white;
 
-    border: none;
-
-    padding: 8px 16px;
-
-    border-radius: 5px;
-
-    cursor: pointer;
-
-    font-size: 0.9rem;
-
-    transition: 0.3s;
+    margin-bottom: 30px;
 
 }
 
 
-button:hover {
+header h1 {
 
-    background-color: #ff85c1;
+    font-size: 35px;
+
+    margin: 10px;
 
 }
+
+
+header p {
+
+    font-size: 17px;
+
+}
+
+
+
+
+#dateTime {
+
+    position: absolute;
+
+    top: 15px;
+
+    left: 20px;
+
+    color: white;
+
+    font-size: 14px;
+
+}
+
+
+
+
+/* =========================
+   STRUCTURE PRINCIPALE
+========================= */
+
+.app-container {
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: flex-start;
+
+    gap: 40px;
+
+    flex-wrap: wrap;
+
+}
+
+
+
+
+/* =========================
+   BLOCS
+========================= */
+
+.form-card,
+.preview-card {
+
+    background: rgba(255,255,255,0.9);
+
+    padding: 25px;
+
+    border-radius: 20px;
+
+    width: 360px;
+
+    box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+
+}
+
+
+
+.form-card h2,
+.preview-card h2 {
+
+    text-align: center;
+
+    color: #ff4f9a;
+
+}
+
+
 
 
 
@@ -58,33 +135,14 @@ button:hover {
    FORMULAIRE
 ========================= */
 
-form {
-
-    margin-bottom: 20px;
-
-    background-color: #ffe3ed;
-
-    padding: 15px;
-
-    border-radius: 8px;
-
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-
-    width: 300px;
-
-    margin-left: auto;
-
-    margin-right: auto;
-
-}
-
-
 
 label {
 
     display: block;
 
-    margin-top: 8px;
+    margin-top: 12px;
+
+    font-weight: bold;
 
 }
 
@@ -92,41 +150,72 @@ label {
 
 input {
 
-    display: block;
+    width: 100%;
 
-    margin: 8px auto;
+    padding: 12px;
 
-    padding: 8px;
+    margin-top: 5px;
 
-    width: 90%;
+    border-radius: 10px;
 
-    border: 1px solid #ff69b4;
+    border: 1px solid #ddd;
 
-    border-radius: 5px;
-
-    font-size: 0.9rem;
+    outline: none;
 
 }
 
 
 
-/* =========================
-   DATE ET HEURE
-========================= */
+input:focus {
 
-#dateTime {
-
-    position: absolute;
-
-    top: 10px;
-
-    left: 10px;
-
-    font-size: 0.9rem;
-
-    color: #555;
+    border-color: #ff4f9a;
 
 }
+
+
+
+
+button {
+
+    width: 100%;
+
+    margin-top: 20px;
+
+    padding: 13px;
+
+    border: none;
+
+    border-radius: 12px;
+
+    background: linear-gradient(
+        135deg,
+        #ff4f9a,
+        #ff85c1
+    );
+
+    color: white;
+
+    font-size: 16px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: .3s;
+
+}
+
+
+
+button:hover {
+
+    transform: translateY(-3px);
+
+    box-shadow: 0 10px 20px rgba(255,79,154,.4);
+
+}
+
+
 
 
 
@@ -134,29 +223,31 @@ input {
    CARTE DE VISITE
 ========================= */
 
+
 #cardPreview {
+
 
     width: 350px;
 
     height: 220px;
 
 
-    border: 2px solid #ff69b4;
-
-    border-radius: 10px;
-
-
-    background-color: white;
-
-    color: black;
-
-
-    padding: 15px;
-
-    box-sizing: border-box;
-
-
     margin: 20px auto;
+
+
+    padding: 20px;
+
+
+    background: white;
+
+
+    border-radius: 18px;
+
+
+    border: 2px solid #ff4f9a;
+
+
+    box-shadow: 0 15px 30px rgba(0,0,0,.2);
 
 
     display: none;
@@ -168,20 +259,15 @@ input {
     overflow: hidden;
 
 
-animation: none;
-opacity: 1;
-
 }
 
 
 
-/* PHOTO */
-
 #cardPhoto {
 
-    width: 65px;
+    width: 75px;
 
-    height: 65px;
+    height: 75px;
 
 
     border-radius: 50%;
@@ -190,44 +276,38 @@ opacity: 1;
     object-fit: cover;
 
 
-    display: block;
-
-
-    margin: 0 auto 8px;
+    margin-bottom: 10px;
 
 }
 
 
-
-/* NOM */
 
 #cardPreview h2 {
 
-    margin: 5px 0;
+    color: #ff4f9a;
 
-
-    color: #ff69b4;
-
-
-    font-size: 18px;
+    margin: 5px;
 
 }
 
 
-
-/* INFORMATIONS */
 
 #cardPreview p {
 
-    margin: 3px 0;
+    margin: 5px;
 
+    font-size: 13px;
 
     color: #555;
 
+    white-space: nowrap;
 
-    font-size: 12px;
+    overflow: hidden;
+
+    text-overflow: ellipsis;
 
 }
+
 
 
 
@@ -235,44 +315,48 @@ opacity: 1;
    FOOTER
 ========================= */
 
+
 footer {
 
-    margin-top: 20px;
+    margin-top: 40px;
 
-    color: #666;
+    text-align: center;
 
-    font-size: 0.8rem;
+    color: white;
 
 }
 
-#cardPreview p {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+
+
+footer a {
+
+    color:white;
+
+    font-weight:bold;
+
+    text-decoration:none;
+
 }
+
+
+
 
 
 /* =========================
-   ANIMATION
+   MOBILE
 ========================= */
 
-@keyframes fadeIn {
 
-    from {
-
-        opacity: 0;
-
-        transform: translateY(20px);
-
-    }
+@media(max-width:800px){
 
 
-    to {
+    .app-container {
 
-        opacity: 1;
+        flex-direction: column;
 
-        transform: translateY(0);
+        align-items:center;
 
     }
+
 
 }
