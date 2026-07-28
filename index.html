@@ -4,16 +4,17 @@
 <head>
 
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 
     <title>Générateur de Carte de Visite</title>
 
-    <!-- Favicon -->
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💳</text></svg>">
 
     <link rel="stylesheet" href="style.css">
 
 </head>
+
 
 
 <body>
@@ -23,26 +24,34 @@
 
     <div id="dateTime"></div>
 
+
     <h1>
         ✨ Générateur de Carte de Visite
     </h1>
 
+
     <p>
         Créez une carte professionnelle élégante en quelques secondes
     </p>
+
 
 </header>
 
 
 
 
+
 <main>
+
 
 <div class="app-container">
 
 
 
+
+
 <!-- FORMULAIRE -->
+
 
 <section class="form-card">
 
@@ -56,15 +65,18 @@
 <form id="businessCardForm">
 
 
+
 <label for="name">
 Nom complet
 </label>
 
+
 <input 
 type="text" 
 id="name" 
-placeholder="Votre nom complet"
+placeholder="Votre nom complet" 
 required>
+
 
 
 
@@ -72,11 +84,14 @@ required>
 Téléphone
 </label>
 
+
 <input 
 type="tel" 
 id="phone" 
-placeholder="Votre numéro de téléphone"
+placeholder="Votre numéro de téléphone" 
 required>
+
+
 
 
 
@@ -84,11 +99,14 @@ required>
 E-mail
 </label>
 
+
 <input 
 type="email" 
 id="email" 
-placeholder="Votre adresse e-mail"
+placeholder="Votre adresse e-mail" 
 required>
+
+
 
 
 
@@ -96,11 +114,14 @@ required>
 Métier
 </label>
 
+
 <input 
 type="text" 
 id="job" 
-placeholder="Votre métier"
+placeholder="Votre métier" 
 required>
+
+
 
 
 
@@ -108,11 +129,14 @@ required>
 Code postal
 </label>
 
+
 <input 
 type="text" 
 id="postalCode" 
-placeholder="Votre code postal"
+placeholder="Votre code postal" 
 required>
+
+
 
 
 
@@ -120,16 +144,23 @@ required>
 Photo de profil
 </label>
 
+
 <input 
 type="file" 
-id="profilePic"
+id="profilePic" 
 accept="image/*">
 
 
 
+
+
 <button type="submit">
+
 🚀 Générer la carte
+
 </button>
+
+
 
 
 </form>
@@ -142,9 +173,13 @@ accept="image/*">
 
 
 
-<!-- APERCU -->
+
+<!-- APERCU CARTE -->
+
+
 
 <section class="preview-card">
+
 
 
 <h2>
@@ -153,28 +188,39 @@ accept="image/*">
 
 
 
+
+
 <div id="cardPreview">
 
 
+
 <img 
-id="cardPhoto"
+id="cardPhoto" 
 alt="Photo de profil">
+
+
 
 
 
 <h2 id="cardName"></h2>
 
 
+
 <p id="cardPhone"></p>
+
 
 
 <p id="cardEmail"></p>
 
 
+
 <p id="cardJob"></p>
 
 
+
 <p id="cardPostalCode"></p>
+
+
 
 
 
@@ -184,7 +230,9 @@ alt="Photo de profil">
 
 
 
-<button id="downloadBtn">
+
+
+<button id="downloadBtn" style="display:none;">
 
 📄 Télécharger en PDF
 
@@ -192,7 +240,11 @@ alt="Photo de profil">
 
 
 
+
+
 </section>
+
+
 
 
 
@@ -205,13 +257,20 @@ alt="Photo de profil">
 
 
 
+
+
 <footer>
+
 
 © 2026 Copyright By
 
+
 <a href="https://github.com/m0um666" target="_blank">
+
 m0um666
+
 </a>
+
 
 
 </footer>
@@ -220,11 +279,16 @@ m0um666
 
 
 
+
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
+
 <script src="script.js"></script>
+
 
 
 </body>
