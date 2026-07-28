@@ -1,13 +1,18 @@
 <!DOCTYPE html>
 <html lang="fr">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💳</text></svg>">
+
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Générateur de Carte de Visite</title>
 
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💳</text></svg>">
+
     <link rel="stylesheet" href="style.css">
+
 </head>
 
 
@@ -33,167 +38,165 @@
 
 <main>
 
-
 <div class="app-container">
 
 
 
-    <!-- FORMULAIRE -->
+<!-- FORMULAIRE -->
 
-    <section class="form-card">
+<section class="form-card">
 
 
-        <h2>
-            📝 Vos informations
-        </h2>
+<h2>
+📝 Vos informations
+</h2>
 
 
 
-        <form id="businessCardForm">
+<form id="businessCardForm">
 
 
-            <label for="name">
-                Nom complet
-            </label>
+<label for="name">
+Nom complet
+</label>
 
-            <input 
-            type="text" 
-            id="name" 
-            placeholder="Votre nom complet" 
-            required>
+<input 
+type="text" 
+id="name" 
+placeholder="Votre nom complet"
+required>
 
 
 
-            <label for="phone">
-                Téléphone
-            </label>
+<label for="phone">
+Téléphone
+</label>
 
-            <input 
-            type="tel" 
-            id="phone" 
-            placeholder="Votre numéro de téléphone" 
-            required>
+<input 
+type="tel" 
+id="phone" 
+placeholder="Votre numéro de téléphone"
+required>
 
 
 
-            <label for="email">
-                E-mail
-            </label>
+<label for="email">
+E-mail
+</label>
 
-            <input 
-            type="email" 
-            id="email" 
-            placeholder="Votre adresse e-mail" 
-            required>
+<input 
+type="email" 
+id="email" 
+placeholder="Votre adresse e-mail"
+required>
 
 
 
-            <label for="job">
-                Métier
-            </label>
+<label for="job">
+Métier
+</label>
 
-            <input 
-            type="text" 
-            id="job" 
-            placeholder="Votre métier" 
-            required>
+<input 
+type="text" 
+id="job" 
+placeholder="Votre métier"
+required>
 
 
 
-            <label for="postalCode">
-                Code postal
-            </label>
+<label for="postalCode">
+Code postal
+</label>
 
-            <input 
-            type="text" 
-            id="postalCode" 
-            placeholder="Votre code postal" 
-            required>
+<input 
+type="text" 
+id="postalCode" 
+placeholder="Votre code postal"
+required>
 
 
 
-            <label for="profilePic">
-                Photo de profil
-            </label>
+<label for="profilePic">
+Photo de profil
+</label>
 
-            <input 
-            type="file" 
-            id="profilePic" 
-            accept="image/*">
+<input 
+type="file" 
+id="profilePic"
+accept="image/*">
 
 
 
-            <button type="submit">
-                🚀 Générer la carte
-            </button>
+<button type="submit">
+🚀 Générer la carte
+</button>
 
 
-        </form>
+</form>
 
 
-    </section>
+</section>
 
 
 
 
 
 
-    <!-- APERCU CARTE -->
+<!-- APERCU -->
 
+<section class="preview-card">
 
-    <section class="preview-card">
 
+<h2>
+👀 Aperçu
+</h2>
 
-        <h2>
-            👀 Aperçu
-        </h2>
 
 
+<div id="cardPreview">
 
-        <div id="cardPreview">
 
+<img 
+id="cardPhoto"
+alt="Photo de profil">
 
-            <img 
-            id="cardPhoto" 
-            alt="Photo de profil">
 
 
+<h2 id="cardName"></h2>
 
-            <h2 id="cardName"></h2>
 
+<p id="cardPhone"></p>
 
-            <p id="cardPhone"></p>
 
+<p id="cardEmail"></p>
 
-            <p id="cardEmail"></p>
 
+<p id="cardJob"></p>
 
-            <p id="cardJob"></p>
 
-
-            <p id="cardPostalCode"></p>
-
-
-
-        </div>
-
-
-
-
-
-        <button id="downloadBtn" style="display:none;">
-            📄 Télécharger en PDF
-        </button>
-
-
-
-    </section>
-
+<p id="cardPostalCode"></p>
 
 
 
 </div>
 
+
+
+
+
+<button id="downloadBtn">
+
+📄 Télécharger en PDF
+
+</button>
+
+
+
+</section>
+
+
+
+</div>
 
 
 </main>
@@ -204,11 +207,11 @@
 
 <footer>
 
-    © 2026 Copyright By
+© 2026 Copyright By
 
-    <a href="https://github.com/m0um666" target="_blank">
-        m0um666
-    </a>
+<a href="https://github.com/m0um666" target="_blank">
+m0um666
+</a>
 
 
 </footer>
