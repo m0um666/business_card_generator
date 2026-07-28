@@ -16,7 +16,7 @@
    RESET
 ============================== */
 
-*{
+* {
 
     margin:0;
     padding:0;
@@ -26,12 +26,11 @@
 
 
 
-
 /* ==============================
    BODY
 ============================== */
 
-body{
+body {
 
     min-height:100vh;
 
@@ -54,7 +53,7 @@ body{
    HEADER
 ============================== */
 
-header{
+header {
 
     text-align:center;
 
@@ -66,7 +65,7 @@ header{
 
 
 
-header h1{
+header h1 {
 
     font-size:40px;
 
@@ -74,7 +73,7 @@ header h1{
 
 
 
-header p{
+header p {
 
     margin-top:10px;
 
@@ -82,7 +81,7 @@ header p{
 
 
 
-#dateTime{
+#dateTime {
 
     position:absolute;
 
@@ -92,9 +91,9 @@ header p{
 
     color:white;
 
+    animation:fadeDate 1s ease;
+
 }
-
-
 
 
 
@@ -102,7 +101,7 @@ header p{
    CONTAINER
 ============================== */
 
-.app-container{
+.app-container {
 
     display:flex;
 
@@ -116,14 +115,12 @@ header p{
 
 
 
-
-
 /* ==============================
    BLOCS
 ============================== */
 
 .form-card,
-.preview-card{
+.preview-card {
 
     width:380px;
 
@@ -134,15 +131,29 @@ header p{
     border-radius:25px;
 
     box-shadow:
-
     0 20px 40px rgba(0,0,0,.25);
+
+    animation:
+    apparition .8s ease forwards;
+
+    transition:.4s;
+
+}
+
+
+
+.form-card:hover,
+.preview-card:hover {
+
+    transform:
+    translateY(-8px);
 
 }
 
 
 
 .form-card h2,
-.preview-card h2{
+.preview-card h2 {
 
     text-align:center;
 
@@ -154,13 +165,11 @@ header p{
 
 
 
-
-
 /* ==============================
    FORMULAIRE
 ============================== */
 
-label{
+label {
 
     display:block;
 
@@ -172,7 +181,7 @@ label{
 
 
 
-input{
+input {
 
     width:100%;
 
@@ -184,13 +193,13 @@ input{
 
     border:1px solid #ddd;
 
-    transition:.3s;
+    transition:.3s ease;
 
 }
 
 
 
-input:focus{
+input:focus {
 
     outline:none;
 
@@ -198,9 +207,11 @@ input:focus{
 
     transform:scale(1.02);
 
+    box-shadow:
+
+    0 0 15px rgba(255,79,154,.4);
+
 }
-
-
 
 
 
@@ -208,7 +219,7 @@ input:focus{
    BOUTONS
 ============================== */
 
-button{
+button {
 
     width:100%;
 
@@ -220,7 +231,6 @@ button{
 
     border-radius:15px;
 
-
     background:
 
     linear-gradient(
@@ -228,7 +238,6 @@ button{
         var(--rose),
         var(--violet)
     );
-
 
     color:white;
 
@@ -240,13 +249,18 @@ button{
 
     transition:.3s;
 
+    position:relative;
+
+    overflow:hidden;
+
 }
 
 
 
-button:hover{
+button:hover {
 
-    transform:translateY(-3px);
+    transform:
+    translateY(-3px);
 
     box-shadow:
 
@@ -256,7 +270,7 @@ button:hover{
 
 
 
-button:active{
+button:active {
 
     transform:scale(.96);
 
@@ -264,13 +278,45 @@ button:active{
 
 
 
+button::after {
+
+    content:"";
+
+    position:absolute;
+
+    width:0;
+
+    height:0;
+
+    background:
+    rgba(255,255,255,.35);
+
+    border-radius:50%;
+
+    transform:
+    translate(-50%,-50%);
+
+}
+
+
+
+button:hover::after {
+
+    width:300px;
+
+    height:300px;
+
+    transition:.6s;
+
+}
+
 
 
 /* ==============================
-   CARTE DE VISITE
+   CARTE
 ============================== */
 
-#cardPreview{
+#cardPreview {
 
     width:350px;
 
@@ -292,11 +338,25 @@ button:active{
 
     overflow:hidden;
 
+    position:relative;
+
 }
 
 
 
-#cardPhoto{
+/* Animation apparition */
+
+#cardPreview.show {
+
+    animation:
+
+    carteArrive .8s cubic-bezier(.25,1.5,.5,1) forwards;
+
+}
+
+
+
+#cardPhoto {
 
     width:65px;
 
@@ -308,11 +368,15 @@ button:active{
 
     border:3px solid var(--rose);
 
+    animation:
+
+    photoPop .6s ease forwards;
+
 }
 
 
 
-#cardPreview h2{
+#cardPreview h2 {
 
     color:var(--rose);
 
@@ -324,7 +388,7 @@ button:active{
 
 
 
-#cardPreview p{
+#cardPreview p {
 
     color:var(--text);
 
@@ -342,13 +406,98 @@ button:active{
 
 
 
+/* ==============================
+   REFLET CARTE
+============================== */
+
+#cardPreview::before {
+
+    content:"";
+
+    position:absolute;
+
+    top:0;
+
+    left:-100%;
+
+    width:60%;
+
+    height:100%;
+
+    pointer-events:none;
+
+    background:
+
+    linear-gradient(
+
+        120deg,
+
+        transparent,
+
+        rgba(255,255,255,.8),
+
+        transparent
+
+    );
+
+    transform:skewX(-25deg);
+
+}
+
+
+
+#cardPreview.show::before {
+
+    animation:
+
+    shine 1.2s ease;
+
+}
+
+
+
+/* ==============================
+   EXPORT PDF
+============================== */
+
+
+#cardPreview.exporting {
+
+    animation:none !important;
+
+    opacity:1 !important;
+
+    transform:none !important;
+
+}
+
+
+
+#cardPreview.exporting::before {
+
+    display:none !important;
+
+}
+
+
+
+#cardPreview.exporting #cardPhoto {
+
+    animation:none !important;
+
+    opacity:1 !important;
+
+    transform:none !important;
+
+}
+
 
 
 /* ==============================
    FOOTER
 ============================== */
 
-footer{
+footer {
 
     margin-top:40px;
 
@@ -360,7 +509,7 @@ footer{
 
 
 
-footer a{
+footer a {
 
     color:white;
 
@@ -368,36 +517,9 @@ footer a{
 
 
 
-
-
 /* ==============================
-   APERCU
+   ANIMATIONS
 ============================== */
-
-.preview-card{
-
-    display:flex;
-
-    flex-direction:column;
-
-    align-items:center;
-
-}
-
-
-/* =================================
-   ANIMATIONS PROFESSIONNELLES
-================================= */
-
-
-/* Apparition générale des cartes */
-
-.form-card,
-.preview-card {
-
-    animation: apparition .8s ease forwards;
-
-}
 
 
 @keyframes apparition {
@@ -425,30 +547,14 @@ footer a{
 
 
 
-
-
-/* Animation de la carte générée */
-
-#cardPreview.show {
-
-
-    animation:
-
-    carteArrive .8s cubic-bezier(.25,1.5,.5,1) forwards;
-
-
-}
-
-
-
 @keyframes carteArrive {
-
 
     0% {
 
         opacity:0;
 
         transform:
+
         scale(.5)
         rotate(-8deg)
         translateY(40px);
@@ -459,6 +565,7 @@ footer a{
     60% {
 
         transform:
+
         scale(1.08)
         rotate(3deg);
 
@@ -470,118 +577,17 @@ footer a{
         opacity:1;
 
         transform:
+
         scale(1)
-        rotate(0deg);
+        rotate(0);
 
     }
-
-
-}
-
-
-
-
-
-/* Effet brillant sur la carte */
-
-#cardPreview {
-
-    position:relative;
-
-    overflow:hidden;
-
-}
-
-
-
-#cardPreview::before {
-
-
-    content:"";
-
-    position:absolute;
-
-    top:0;
-
-    left:-100%;
-
-    width:60%;
-
-    height:100%;
-
-
-    background:
-
-    linear-gradient(
-
-        120deg,
-
-        transparent,
-
-        rgba(255,255,255,.8),
-
-        transparent
-
-    );
-
-
-    transform:skewX(-25deg);
-
-
-}
-
-
-
-#cardPreview.show::before {
-
-
-    animation:
-
-    shine 1.2s ease;
-
-
-}
-
-
-
-@keyframes shine {
-
-
-    from {
-
-        left:-100%;
-
-    }
-
-
-    to {
-
-        left:150%;
-
-    }
-
-}
-
-
-
-
-
-/* Photo */
-
-#cardPhoto {
-
-
-    animation:
-
-    photoPop .6s ease;
-
 
 }
 
 
 
 @keyframes photoPop {
-
 
     from {
 
@@ -606,124 +612,26 @@ footer a{
 
 
 
+@keyframes shine {
 
+    from {
 
-/* Boutons */
+        left:-100%;
 
-button {
+    }
 
 
-    position:relative;
+    to {
 
-    overflow:hidden;
+        left:150%;
 
-}
-
-
-
-button::after {
-
-
-    content:"";
-
-    position:absolute;
-
-    width:0;
-
-    height:0;
-
-    background:
-
-    rgba(255,255,255,.35);
-
-    border-radius:50%;
-
-    transform:translate(-50%,-50%);
-
-
-}
-
-
-
-button:hover::after {
-
-
-    width:300px;
-
-    height:300px;
-
-    transition:.6s;
-
-}
-
-
-
-
-
-/* Mouvement léger des blocs */
-
-.form-card:hover,
-.preview-card:hover {
-
-
-    transform:
-
-    translateY(-8px);
-
-
-    transition:.4s;
-
-
-}
-
-
-
-
-
-
-/* Animation des inputs */
-
-input {
-
-
-    transition:
-
-    .3s ease;
-
-}
-
-
-
-input:focus {
-
-
-    box-shadow:
-
-    0 0 15px rgba(255,79,154,.4);
-
-
-}
-
-
-
-
-
-/* Date */
-
-#dateTime {
-
-
-    animation:
-
-    fadeDate 1s ease;
-
+    }
 
 }
 
 
 
 @keyframes fadeDate {
-
 
     from {
 
@@ -741,14 +649,16 @@ input:focus {
 }
 
 
+
 /* ==============================
    RESPONSIVE
 ============================== */
 
-@media(max-width:800px){
+
+@media(max-width:800px) {
 
 
-    .app-container{
+    .app-container {
 
         flex-direction:column;
 
@@ -757,7 +667,7 @@ input:focus {
     }
 
 
-    header h1{
+    header h1 {
 
         font-size:30px;
 
