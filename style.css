@@ -1,24 +1,58 @@
+/* ==============================
+   VARIABLES
+============================== */
+
+:root {
+
+    --rose:#ff4f9a;
+    --violet:#8e54ff;
+    --text:#222;
+
+}
+
+
+
+/* ==============================
+   RESET
+============================== */
+
 *{
+
     margin:0;
     padding:0;
     box-sizing:border-box;
+
 }
 
+
+
+
+/* ==============================
+   BODY
+============================== */
 
 body{
 
     min-height:100vh;
 
-    font-family:"Segoe UI",Arial,sans-serif;
+    font-family:"Segoe UI", Arial, sans-serif;
 
     background:
-    linear-gradient(135deg,#ff7eb3,#6c63ff);
+    linear-gradient(
+        135deg,
+        #ff7eb3,
+        #6c63ff
+    );
 
     padding:30px;
 
 }
 
 
+
+/* ==============================
+   HEADER
+============================== */
 
 header{
 
@@ -31,11 +65,13 @@ header{
 }
 
 
+
 header h1{
 
     font-size:40px;
 
 }
+
 
 
 header p{
@@ -61,6 +97,11 @@ header p{
 
 
 
+
+/* ==============================
+   CONTAINER
+============================== */
+
 .app-container{
 
     display:flex;
@@ -76,9 +117,13 @@ header p{
 
 
 
+
+/* ==============================
+   BLOCS
+============================== */
+
 .form-card,
 .preview-card{
-
 
     width:380px;
 
@@ -92,7 +137,6 @@ header p{
 
     0 20px 40px rgba(0,0,0,.25);
 
-
 }
 
 
@@ -102,13 +146,19 @@ header p{
 
     text-align:center;
 
-    color:#ff4f9a;
+    color:var(--rose);
 
     margin-bottom:20px;
 
 }
 
 
+
+
+
+/* ==============================
+   FORMULAIRE
+============================== */
 
 label{
 
@@ -134,20 +184,37 @@ input{
 
     border:1px solid #ddd;
 
+    transition:.3s;
+
+}
+
+
+
+input:focus{
+
+    outline:none;
+
+    border-color:var(--rose);
+
+    transform:scale(1.02);
+
 }
 
 
 
 
-button{
 
+/* ==============================
+   BOUTONS
+============================== */
+
+button{
 
     width:100%;
 
     margin-top:20px;
 
     padding:14px;
-
 
     border:none;
 
@@ -157,9 +224,9 @@ button{
     background:
 
     linear-gradient(
-    135deg,
-    #ff4f9a,
-    #8e54ff
+        135deg,
+        var(--rose),
+        var(--violet)
     );
 
 
@@ -171,6 +238,8 @@ button{
 
     cursor:pointer;
 
+    transition:.3s;
+
 }
 
 
@@ -179,83 +248,77 @@ button:hover{
 
     transform:translateY(-3px);
 
+    box-shadow:
+
+    0 10px 20px rgba(0,0,0,.2);
+
 }
 
 
 
-/* CARTE */
+button:active{
 
+    transform:scale(.96);
+
+}
+
+
+
+
+
+/* ==============================
+   CARTE DE VISITE
+============================== */
 
 #cardPreview{
-
 
     width:350px;
 
     height:230px;
 
-
     background:white;
 
-
-    border:3px solid #ff4f9a;
-
+    border:3px solid var(--rose);
 
     border-radius:20px;
 
-
     padding:15px;
-
 
     margin:20px auto;
 
-
     display:none;
-
 
     text-align:center;
 
-
     overflow:hidden;
 
-
 }
-
 
 
 
 #cardPhoto{
 
-
     width:65px;
 
     height:65px;
 
-
     border-radius:50%;
-
 
     object-fit:cover;
 
-
-    border:3px solid #ff4f9a;
-
+    border:3px solid var(--rose);
 
 }
 
 
 
-
 #cardPreview h2{
 
-
-    color:#ff4f9a !important;
-
+    color:var(--rose);
 
     font-size:20px;
 
-
     margin:8px;
-
 
 }
 
@@ -263,15 +326,11 @@ button:hover{
 
 #cardPreview p{
 
-
-    color:#222 !important;
-
+    color:var(--text);
 
     font-size:13px;
 
-
     margin:4px;
-
 
     white-space:nowrap;
 
@@ -279,10 +338,15 @@ button:hover{
 
     text-overflow:ellipsis;
 
-
 }
 
 
+
+
+
+/* ==============================
+   FOOTER
+============================== */
 
 footer{
 
@@ -295,6 +359,7 @@ footer{
 }
 
 
+
 footer a{
 
     color:white;
@@ -302,27 +367,401 @@ footer a{
 }
 
 
-.preview-card {
-
-    display: flex;
-
-    flex-direction: column;
-
-    align-items: center;
-
-}
 
 
-@media(max-width:800px){
 
+/* ==============================
+   APERCU
+============================== */
 
-.app-container{
+.preview-card{
+
+    display:flex;
 
     flex-direction:column;
 
     align-items:center;
 
 }
+
+
+/* =================================
+   ANIMATIONS PROFESSIONNELLES
+================================= */
+
+
+/* Apparition générale des cartes */
+
+.form-card,
+.preview-card {
+
+    animation: apparition .8s ease forwards;
+
+}
+
+
+@keyframes apparition {
+
+    from {
+
+        opacity:0;
+
+        transform:
+        translateY(40px);
+
+    }
+
+
+    to {
+
+        opacity:1;
+
+        transform:
+        translateY(0);
+
+    }
+
+}
+
+
+
+
+
+/* Animation de la carte générée */
+
+#cardPreview.show {
+
+
+    animation:
+
+    carteArrive .8s cubic-bezier(.25,1.5,.5,1) forwards;
+
+
+}
+
+
+
+@keyframes carteArrive {
+
+
+    0% {
+
+        opacity:0;
+
+        transform:
+        scale(.5)
+        rotate(-8deg)
+        translateY(40px);
+
+    }
+
+
+    60% {
+
+        transform:
+        scale(1.08)
+        rotate(3deg);
+
+    }
+
+
+    100% {
+
+        opacity:1;
+
+        transform:
+        scale(1)
+        rotate(0deg);
+
+    }
+
+
+}
+
+
+
+
+
+/* Effet brillant sur la carte */
+
+#cardPreview {
+
+    position:relative;
+
+    overflow:hidden;
+
+}
+
+
+
+#cardPreview::before {
+
+
+    content:"";
+
+    position:absolute;
+
+    top:0;
+
+    left:-100%;
+
+    width:60%;
+
+    height:100%;
+
+
+    background:
+
+    linear-gradient(
+
+        120deg,
+
+        transparent,
+
+        rgba(255,255,255,.8),
+
+        transparent
+
+    );
+
+
+    transform:skewX(-25deg);
+
+
+}
+
+
+
+#cardPreview.show::before {
+
+
+    animation:
+
+    shine 1.2s ease;
+
+
+}
+
+
+
+@keyframes shine {
+
+
+    from {
+
+        left:-100%;
+
+    }
+
+
+    to {
+
+        left:150%;
+
+    }
+
+}
+
+
+
+
+
+/* Photo */
+
+#cardPhoto {
+
+
+    animation:
+
+    photoPop .6s ease;
+
+
+}
+
+
+
+@keyframes photoPop {
+
+
+    from {
+
+        opacity:0;
+
+        transform:
+        scale(0);
+
+    }
+
+
+    to {
+
+        opacity:1;
+
+        transform:
+        scale(1);
+
+    }
+
+}
+
+
+
+
+
+/* Boutons */
+
+button {
+
+
+    position:relative;
+
+    overflow:hidden;
+
+}
+
+
+
+button::after {
+
+
+    content:"";
+
+    position:absolute;
+
+    width:0;
+
+    height:0;
+
+    background:
+
+    rgba(255,255,255,.35);
+
+    border-radius:50%;
+
+    transform:translate(-50%,-50%);
+
+
+}
+
+
+
+button:hover::after {
+
+
+    width:300px;
+
+    height:300px;
+
+    transition:.6s;
+
+}
+
+
+
+
+
+/* Mouvement léger des blocs */
+
+.form-card:hover,
+.preview-card:hover {
+
+
+    transform:
+
+    translateY(-8px);
+
+
+    transition:.4s;
+
+
+}
+
+
+
+
+
+
+/* Animation des inputs */
+
+input {
+
+
+    transition:
+
+    .3s ease;
+
+}
+
+
+
+input:focus {
+
+
+    box-shadow:
+
+    0 0 15px rgba(255,79,154,.4);
+
+
+}
+
+
+
+
+
+/* Date */
+
+#dateTime {
+
+
+    animation:
+
+    fadeDate 1s ease;
+
+
+}
+
+
+
+@keyframes fadeDate {
+
+
+    from {
+
+        opacity:0;
+
+    }
+
+
+    to {
+
+        opacity:1;
+
+    }
+
+}
+
+
+/* ==============================
+   RESPONSIVE
+============================== */
+
+@media(max-width:800px){
+
+
+    .app-container{
+
+        flex-direction:column;
+
+        align-items:center;
+
+    }
+
+
+    header h1{
+
+        font-size:30px;
+
+    }
 
 
 }
