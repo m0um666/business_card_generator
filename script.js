@@ -11,6 +11,8 @@ const downloadBtn = document.getElementById("downloadBtn");
 
 
 
+
+
 form.addEventListener("submit", function(e) {
 
 
@@ -46,6 +48,7 @@ form.addEventListener("submit", function(e) {
 
 
 
+
     // Photo de profil
 
     const photo =
@@ -62,10 +65,13 @@ form.addEventListener("submit", function(e) {
 
         reader.onload = function(e){
 
+
             document.getElementById("cardPhoto").src =
                 e.target.result;
 
+
         };
+
 
 
         reader.readAsDataURL(photo);
@@ -76,20 +82,28 @@ form.addEventListener("submit", function(e) {
 
 
 
+
     // Affichage carte
 
     cardPreview.style.display = "block";
 
-setTimeout(() => {
 
-    cardPreview.classList.add("show");
 
-}, 50);
+    requestAnimationFrame(() => {
+
+        cardPreview.classList.add("show");
+
+    });
+
+
 
     downloadBtn.style.display = "block";
 
 
 });
+
+
+
 
 
 
@@ -111,9 +125,40 @@ downloadBtn.addEventListener("click", async function(){
 
 
 
-    // Sauvegarde opacité
 
-    const ancienneOpacite = photo.style.opacity;
+
+    // Attendre que la photo soit chargée
+
+    if(photo && !photo.complete){
+
+
+        await new Promise(resolve => {
+
+
+            photo.onload = resolve;
+
+
+        });
+
+
+    }
+
+
+
+
+
+    // Sauvegarde
+
+    const ancienneOpacite =
+        photo.style.opacity;
+
+
+
+
+
+    // Désactivation animations export
+
+    element.classList.add("exporting");
 
 
 
@@ -122,15 +167,14 @@ downloadBtn.addEventListener("click", async function(){
 
 
 
-    const canvas = await html2canvas(element, {
 
-        backgroundColor:"#ffffff",
+    // Petite pause pour stabiliser la capture
 
-        scale:3,
+    await new Promise(resolve => {
 
-        useCORS:true,
 
-        allowTaint:true
+        setTimeout(resolve,300);
+
 
     });
 
@@ -138,9 +182,44 @@ downloadBtn.addEventListener("click", async function(){
 
 
 
-    // Restauration
 
-    photo.style.opacity = ancienneOpacite;
+
+    const canvas = await html2canvas(element, {
+
+
+        backgroundColor:"#ffffff",
+
+
+        scale:3,
+
+
+        useCORS:true,
+
+
+        allowTaint:true,
+
+
+        logging:false
+
+
+
+    });
+
+
+
+
+
+
+    // Retour état normal
+
+    element.classList.remove("exporting");
+
+
+
+    photo.style.opacity =
+        ancienneOpacite;
+
+
 
 
 
@@ -152,18 +231,26 @@ downloadBtn.addEventListener("click", async function(){
 
 
 
+
+
     const { jsPDF } = window.jspdf;
+
+
 
 
 
 
     const pdf = new jsPDF({
 
+
         orientation:"landscape",
+
 
         unit:"px",
 
+
         format:[400,280]
+
 
     });
 
@@ -171,21 +258,32 @@ downloadBtn.addEventListener("click", async function(){
 
 
 
+
     pdf.addImage(
+
 
         imgData,
 
+
         "PNG",
 
-        25,
 
         25,
+
+
+        25,
+
 
         350,
 
+
         230
 
+
     );
+
+
+
 
 
 
@@ -203,6 +301,7 @@ downloadBtn.addEventListener("click", async function(){
 
 
 
+
 // ==============================
 // DATE & HEURE
 // ==============================
@@ -211,38 +310,58 @@ downloadBtn.addEventListener("click", async function(){
 function updateDateTime(){
 
 
+
     const now = new Date();
 
 
 
 
+
     const date =
+
         now.toLocaleDateString("fr-FR", {
+
 
             weekday:"long",
 
+
             day:"2-digit",
+
 
             month:"long",
 
+
             year:"numeric"
 
+
+
         });
+
+
 
 
 
 
 
     const heure =
+
         now.toLocaleTimeString("fr-FR", {
+
 
             hour:"2-digit",
 
+
             minute:"2-digit",
+
 
             second:"2-digit"
 
+
+
         });
+
+
+
 
 
 
@@ -250,11 +369,15 @@ function updateDateTime(){
 
     document.getElementById("dateTime").textContent =
 
+
         `📅 ${date} • 🕒 ${heure}`;
 
 
 
 }
+
+
+
 
 
 
