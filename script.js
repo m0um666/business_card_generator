@@ -2,105 +2,85 @@
 // GÉNÉRATION DE LA CARTE
 // ==============================
 
-
-const form = document.getElementById("businessCardForm");
-
-const cardPreview = document.getElementById("cardPreview");
-
-const downloadBtn = document.getElementById("downloadBtn");
+document
+    .getElementById("businessCardForm")
+    .addEventListener("submit", function (e) {
 
 
+        e.preventDefault();
 
 
 
-form.addEventListener("submit", function(e) {
+        // Informations
 
-
-    e.preventDefault();
-
-
-
-    // Informations carte
-
-    document.getElementById("cardName").textContent =
-        document.getElementById("name").value;
+        document.getElementById("cardName").textContent =
+            document.getElementById("name").value;
 
 
 
-    document.getElementById("cardPhone").textContent =
-        "📞 " + document.getElementById("phone").value;
+        document.getElementById("cardPhone").textContent =
+            "📞 " + document.getElementById("phone").value;
 
 
 
-    document.getElementById("cardEmail").textContent =
-        "✉️ " + document.getElementById("email").value;
+        document.getElementById("cardEmail").textContent =
+            "✉️ " + document.getElementById("email").value;
 
 
 
-    document.getElementById("cardJob").textContent =
-        "💼 " + document.getElementById("job").value;
+        document.getElementById("cardJob").textContent =
+            "💼 " + document.getElementById("job").value;
 
 
 
-    document.getElementById("cardPostalCode").textContent =
-        "📍 " + document.getElementById("postalCode").value;
+        document.getElementById("cardPostalCode").textContent =
+            "📍 " + document.getElementById("postalCode").value;
 
 
 
 
 
-    // Photo de profil
+        // Photo de profil
 
-    const photo =
-        document.getElementById("profilePic").files[0];
-
-
-
-    if(photo){
-
-
-        const reader = new FileReader();
+        const photo =
+            document.getElementById("profilePic").files[0];
 
 
 
-        reader.onload = function(e){
+        if (photo) {
 
 
-            document.getElementById("cardPhoto").src =
-                e.target.result;
-
-
-        };
+            const reader = new FileReader();
 
 
 
-        reader.readAsDataURL(photo);
+            reader.onload = function (e) {
+
+                document.getElementById("cardPhoto").src =
+                    e.target.result;
+
+            };
 
 
-    }
+
+            reader.readAsDataURL(photo);
+
+
+        }
 
 
 
 
+        // Affichage de la carte
 
-    // Affichage carte
-
-    cardPreview.style.display = "block";
-
+        document.getElementById("cardPreview").style.display = "block";
 
 
-    requestAnimationFrame(() => {
+        document.getElementById("downloadBtn").style.display = "block";
 
-        cardPreview.classList.add("show");
+
 
     });
-
-
-
-    downloadBtn.style.display = "block";
-
-
-});
 
 
 
@@ -111,188 +91,132 @@ form.addEventListener("submit", function(e) {
 
 
 // ==============================
-// EXPORT PDF
+// EXPORT EN PDF
 // ==============================
 
-
-downloadBtn.addEventListener("click", async function(){
-
-
-
-    const element = document.getElementById("cardPreview");
-
-    const photo = document.getElementById("cardPhoto");
+document
+    .getElementById("downloadBtn")
+    .addEventListener("click", async function () {
 
 
 
+        const element =
+            document.getElementById("cardPreview");
 
 
-    // Attendre que la photo soit chargée
 
-    if(photo && !photo.complete){
+        // Correction opacité image pendant export
 
-
-        await new Promise(resolve => {
-
-
-            photo.onload = resolve;
+        const photo =
+            document.getElementById("cardPhoto");
 
 
-        });
+
+        const ancienneOpacite =
+            photo.style.opacity;
 
 
-    }
+
+        photo.style.opacity = "1";
 
 
 
 
 
-    // Sauvegarde
-
-    const ancienneOpacite =
-        photo.style.opacity;
+        const canvas =
+            await html2canvas(element, {
 
 
+                backgroundColor:"#ffffff",
+
+
+                scale:3,
+
+
+                useCORS:true,
+
+
+                allowTaint:true
+
+
+            });
 
 
 
-    // Désactivation animations export
-
-    element.classList.add("exporting");
 
 
+        // remettre l'opacité après capture
 
-    photo.style.opacity = "1";
-
+        photo.style.opacity =
+            ancienneOpacite;
 
 
 
 
-    // Petite pause pour stabiliser la capture
-
-    await new Promise(resolve => {
 
 
-        setTimeout(resolve,300);
+        const imgData =
+            canvas.toDataURL("image/png");
+
+
+
+
+
+
+        const { jsPDF } =
+            window.jspdf;
+
+
+
+
+
+
+        const pdf =
+            new jsPDF({
+
+
+                orientation:"landscape",
+
+
+                unit:"px",
+
+
+                format:[400,280]
+
+
+            });
+
+
+
+
+
+
+        pdf.addImage(
+
+            imgData,
+
+            "PNG",
+
+            25,
+
+            25,
+
+            350,
+
+            230
+
+        );
+
+
+
+
+
+
+        pdf.save("carte_de_visite.pdf");
+
 
 
     });
-
-
-
-
-
-
-
-    const canvas = await html2canvas(element, {
-
-
-        backgroundColor:"#ffffff",
-
-
-        scale:3,
-
-
-        useCORS:true,
-
-
-        allowTaint:true,
-
-
-        logging:false
-
-
-
-    });
-
-
-
-
-
-
-    // Retour état normal
-
-    element.classList.remove("exporting");
-
-
-
-    photo.style.opacity =
-        ancienneOpacite;
-
-
-
-
-
-
-
-    const imgData =
-        canvas.toDataURL("image/png");
-
-
-
-
-
-
-    const { jsPDF } = window.jspdf;
-
-
-
-
-
-
-    const pdf = new jsPDF({
-
-
-        orientation:"landscape",
-
-
-        unit:"px",
-
-
-        format:[400,280]
-
-
-    });
-
-
-
-
-
-
-    pdf.addImage(
-
-
-        imgData,
-
-
-        "PNG",
-
-
-        25,
-
-
-        25,
-
-
-        350,
-
-
-        230
-
-
-    );
-
-
-
-
-
-
-
-    pdf.save("carte_de_visite.pdf");
-
-
-
-});
 
 
 
@@ -310,57 +234,46 @@ downloadBtn.addEventListener("click", async function(){
 function updateDateTime(){
 
 
-
-    const now = new Date();
+    const now =
+        new Date();
 
 
 
 
 
     const date =
+        now.toLocaleDateString(
+            "fr-FR",
+            {
 
-        now.toLocaleDateString("fr-FR", {
+                weekday:"long",
 
+                day:"2-digit",
 
-            weekday:"long",
+                month:"long",
 
+                year:"numeric"
 
-            day:"2-digit",
-
-
-            month:"long",
-
-
-            year:"numeric"
-
-
-
-        });
-
-
+            }
+        );
 
 
 
 
 
     const heure =
+        now.toLocaleTimeString(
+            "fr-FR",
+            {
 
-        now.toLocaleTimeString("fr-FR", {
+                hour:"2-digit",
 
+                minute:"2-digit",
 
-            hour:"2-digit",
+                second:"2-digit"
 
-
-            minute:"2-digit",
-
-
-            second:"2-digit"
-
-
-
-        });
-
-
+            }
+        );
 
 
 
@@ -368,7 +281,6 @@ function updateDateTime(){
 
 
     document.getElementById("dateTime").textContent =
-
 
         `📅 ${date} • 🕒 ${heure}`;
 
@@ -381,8 +293,11 @@ function updateDateTime(){
 
 
 
+// Mise à jour toutes les secondes
 
 setInterval(updateDateTime,1000);
 
+
+// Affichage immédiat
 
 updateDateTime();
