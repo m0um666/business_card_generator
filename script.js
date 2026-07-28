@@ -80,6 +80,12 @@ form.addEventListener("submit", function(e) {
 
     cardPreview.style.display = "block";
 
+setTimeout(() => {
+
+    cardPreview.classList.add("show");
+
+}, 50);
+
     downloadBtn.style.display = "block";
 
 
